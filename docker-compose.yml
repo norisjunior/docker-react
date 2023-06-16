@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: /home/noris/stephengrider/prod/frontend/.
+      dockerfile: /home/noris/stephengrider/prod/frontend/Dockerfile.dev
+
+    ports:
+      - "3000:3000"
+    volumes:
+      - /home/node/app/node_modules
+      - /home/noris/stephengrider/prod/frontend:/home/node/app
+
+  tests:
+    build:
+      context: /home/noris/stephengrider/prod/frontend/.
+      dockerfile: /home/noris/stephengrider/prod/frontend/Dockerfile.dev
+
+    volumes:
+      - /home/node/app/node_modules
+      - /home/noris/stephengrider/prod/frontend:/home/node/app
+    command: ["npm", "run", "test"]
